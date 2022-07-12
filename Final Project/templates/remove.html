@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Remove
+{% endblock %}
+
+{% block main %}
+<main class="container p-5 extra">
+  <style>
+    main {
+      text-align: left;
+    }
+  </style>
+    {% if bo == False %}
+    <div class="alert alert-info" role="alert">
+      Your list is empty.
+    </div>
+    {% else %}
+    <form action="" method="post" name="task_list">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <label class="checkbox">
+                <input type="checkbox" id="select-all"/>
+            </label>
+            Select All
+          </td>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+          <td>
+            <label class="checkbox">
+              <input type="checkbox" name="task_keys" value="{{ task.key }}"/>
+            </label>
+            {{ task.task }}
+          </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+      <script>
+        document.getElementById('select-all').onclick = function()
+        {
+          var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          for (var checkbox of checkboxes)
+          {
+            checkbox.checked = this.checked;
+          }
+        };
+      </script>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="btn btn-primary" type="submit">Remove from my list</button>
+        </div>
+      </div>
+    </form>
+    {% endif %}
+ </main>
+{% endblock %}
