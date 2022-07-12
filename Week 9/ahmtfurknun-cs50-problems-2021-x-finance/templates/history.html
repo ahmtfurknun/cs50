@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price</th>
+      <th scope="col">Transacted</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for stock in stocks %}
+    <tr>
+      <th scope="row">{{ stock.symbol }}</th>
+      <td>
+        {% if stocks.operation == "SELL" %}}
+            -{{ stock.shares }}
+        {% else %}
+            {{ stock.shares }}
+        {% endif %}
+      </td>
+      <td>{{ stock.price }}</td>
+      <td>{{ stock.date }} {{ stock.time }}</td>
+    </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
